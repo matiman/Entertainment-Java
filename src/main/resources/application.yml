@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/mydb
+    username: root
+    password: mysecretpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysecretpassword -e MYSQL_DATABASE=mydb mysql:latest
+
+
