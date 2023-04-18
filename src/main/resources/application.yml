@@ -4,12 +4,15 @@ spring:
     username: root
     password: mysecretpassword
     driver-class-name: com.mysql.cj.jdbc.Driver
+  main:
+    allow-circular-references: true
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
         hbm2ddl:
           auto: update
+
 
 #docker run -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=mysecretpassword -e MYSQL_DATABASE=mydb mysql:latest
 

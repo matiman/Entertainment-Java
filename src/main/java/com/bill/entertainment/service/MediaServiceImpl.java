@@ -9,16 +9,16 @@ import java.util.List;
 
 public abstract class MediaServiceImpl<T extends Media, R extends JpaRepository<T, Long>> implements MediaService<T> {
     @Autowired
-    protected R repository;
+    protected R mediaRepository;
 
     @Override
     public List<T> getAll() {
-        return repository.findAll();
+        return mediaRepository.findAll();
     }
 
     @Override
     public T getById(Long id) throws MediaNotFoundException {
-        return repository.findById(id)
+        return mediaRepository.findById(id)
                 .orElseThrow(() -> new MediaNotFoundException("Media id not found: " + id));
     }
 

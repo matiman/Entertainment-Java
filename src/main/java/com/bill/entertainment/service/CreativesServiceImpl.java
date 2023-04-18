@@ -9,23 +9,23 @@ import java.util.List;
 
 public abstract class CreativesServiceImpl<T extends Creatives, R extends JpaRepository<T, Long>> implements CreativesService<T> {
     @Autowired
-    protected R repository;
+    protected R creativesRepository;
 
     @Override
     public List<T> getAll() {
-        return repository.findAll();
+        return creativesRepository.findAll();
     }
 
     @Override
     public T getById(Long id) throws CreativesNotFoundException {
-        return repository.findById(id)
+        return creativesRepository.findById(id)
                 .orElseThrow(() -> new CreativesNotFoundException("Creatives not found with id: " + id));
     }
 
     @Override
     public T create(T creatives) throws CreativesValidationException {
         validateCreatives(creatives);
-        return repository.save(creatives);
+        return creativesRepository.save(creatives);
     }
 
     @Override
@@ -33,14 +33,14 @@ public abstract class CreativesServiceImpl<T extends Creatives, R extends JpaRep
         T existingCreatives = getById(id);
 
         validateCreatives(existingCreatives);
-        return repository.save(existingCreatives);
+        return creativesRepository.save(existingCreatives);
     }
 
     @Override
     public void delete(Long id) throws Exception {
         T existingCreatives = getById(id);
         try {
-            repository.delete(existingCreatives);
+            creativesRepository.delete(existingCreatives);
         } catch (Exception e) {
             throw new CreativesDeletionException("Failed to delete creatives with id: " + id);
         }

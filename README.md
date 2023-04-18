@@ -12,6 +12,13 @@ Instructions on how to run the application:
 - Build the project with gradle on Intelij and run the application 
 - http://localhost:8080/api/ is the gateway. 
 - Use the following URLs and parameters ( You can use curl or POSTMAN). Please change the body accordingly.
+  - GET
+    - actor:
+      - curl -X GET http://localhost:8080/api/actors
+      - curl -X GET http://localhost:8080/api/actors/1
+    - movie:
+      - curl -X GET http://localhost:8080/api/movies
+      - curl -X GET http://localhost:8080/api/movies/1
   - Create 
     - actor: 
       - curl --header "Content-Type: application/json" \                                                                                                                       

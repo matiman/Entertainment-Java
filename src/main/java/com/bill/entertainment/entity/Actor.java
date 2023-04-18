@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Table(name = "actors")
 @Data
-//@AllArgsConstructor
+
 public class Actor extends Creatives {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

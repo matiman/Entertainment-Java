@@ -11,11 +11,11 @@ import java.util.List;
 public interface MediaService<T extends Media> {
     List<T> getAll();
     T getById(Long id) throws MediaNotFoundException;
-    T create(T media) throws MediaValidationException;
-    T update(Long id, T media) throws MediaNotFoundException, MediaValidationException;
+    T create(T media) throws MediaValidationException, CreativesNotFoundException;
+    T update(Long id, T media) throws MediaNotFoundException, MediaValidationException, CreativesNotFoundException;
     void delete(Long id) throws MediaNotFoundException, MediaDeletionException;
 
-    void validateMedia(Media media) throws MediaValidationException, CreativesNotFoundException;
+    void validateMedia(Media media,boolean isNewMedia) throws MediaValidationException, CreativesNotFoundException;
 
 }
 
