@@ -9,7 +9,6 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication
 @EnableJpaRepositories("com.bill.entertainment.dao")
 @EntityScan( basePackages = {"com.bill.entertainment.entity"})
-//@ComponentScan(basePackages = {"com.bill.entertainment.advice"})
 
 public class EntertainmentApplication {
 

@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
-public class CustomErrorController {
+public class CustomErrorAdvice {
 
-    public CustomErrorController() {
-        System.out.println("CustomErrorController instantiated");
+    public CustomErrorAdvice() {
+        System.out.println("CustomErrorAdvice instantiated");
     }
 
     @ExceptionHandler(NoHandlerFoundException.class)
