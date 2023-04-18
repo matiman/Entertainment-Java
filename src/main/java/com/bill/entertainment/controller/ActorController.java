@@ -7,6 +7,7 @@ import com.bill.entertainment.exception.CreativesValidationException;
 import com.bill.entertainment.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,7 +44,7 @@ public class ActorController {
 
     }
 
-    @PostMapping
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createActor(@RequestBody Actor newActor) {
 
         try {
@@ -58,7 +59,7 @@ public class ActorController {
 
     }
 
-    @PutMapping("/{id}")
+    @PutMapping(path = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> updateActor(@PathVariable Long id, @RequestBody Actor actor) {
         try {
            Actor updatedActor = actorService.update(id, actor);
