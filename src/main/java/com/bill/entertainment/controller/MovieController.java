@@ -6,6 +6,7 @@ import com.bill.entertainment.exception.MediaDeletionException;
 import com.bill.entertainment.exception.MediaNotFoundException;
 import com.bill.entertainment.exception.MediaValidationException;
 import com.bill.entertainment.service.MovieService;
+import com.bill.entertainment.util.ErrorMessages;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -50,8 +51,8 @@ public class MovieController {
     public ResponseEntity<String> createMovie(@Valid @RequestBody Movie movie) {
         try {
 
-            Movie newMovie = movieService.create(movie);
-            return ResponseEntity.status(HttpStatus.CREATED).body(newMovie.toString());
+            movieService.create(movie);
+            return ResponseEntity.status(HttpStatus.CREATED).body(ErrorMessages.SUCCESS);
         } catch (  MediaValidationException | IllegalArgumentException e ) {
             return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
         }
@@ -80,7 +81,7 @@ public class MovieController {
     public ResponseEntity<String> deleteMovie(@PathVariable Long id) {
         try {
             movieService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK.getReasonPhrase());
+            return ResponseEntity.status(HttpStatus.OK).body(ErrorMessages.SUCCESS);
         } catch (MediaNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (MediaDeletionException e) {

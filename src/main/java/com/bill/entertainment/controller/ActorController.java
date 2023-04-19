@@ -5,6 +5,7 @@ import com.bill.entertainment.exception.CreativesDeletionException;
 import com.bill.entertainment.exception.CreativesNotFoundException;
 import com.bill.entertainment.exception.CreativesValidationException;
 import com.bill.entertainment.service.ActorService;
+import com.bill.entertainment.util.ErrorMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -76,7 +77,7 @@ public class ActorController {
     public ResponseEntity<String> deleteActor(@PathVariable Long id) {
         try {
             actorService.delete(id);
-            return ResponseEntity.status(HttpStatus.OK).body(HttpStatus.OK.getReasonPhrase());
+            return ResponseEntity.status(HttpStatus.OK).body(ErrorMessages.SUCCESS);
         } catch (CreativesNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         } catch (CreativesDeletionException e) {

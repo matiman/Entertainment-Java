@@ -4,6 +4,7 @@ import com.bill.entertainment.dao.ActorRepository;
 import com.bill.entertainment.entity.Actor;
 import com.bill.entertainment.entity.Movie;
 import com.bill.entertainment.exception.*;
+import com.bill.entertainment.util.ErrorMessages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +23,7 @@ public class ActorService extends CreativesServiceImpl<Actor, ActorRepository> {
     @Override
     public Actor create(Actor actor) throws CreativesValidationException  {
         if(!validate(actor))
-            throw new CreativesValidationException("Actor already exists");
+            throw new CreativesValidationException(ErrorMessages.DUPLICATE_ACTOR);
         return creativesRepository.save(actor);
     }
 
@@ -49,14 +50,14 @@ public class ActorService extends CreativesServiceImpl<Actor, ActorRepository> {
 
         Optional<Actor> actorOpt = creativesRepository.findById(id);
         if (actorOpt.isEmpty()) {
-            throw new CreativesNotFoundException("Actor with ID " + id + " not found");
+            throw new CreativesNotFoundException(ErrorMessages.ACTOR_NOT_FOUND);
         }
 
         Actor actor = actorOpt.get();
 
         List<Movie> movies = movieService.getMoviesByActor(id);
         if (!movies.isEmpty()) {
-            throw new CreativesDeletionException("Actor with ID " + id + " cannot be deleted because they are part of one more movies.");
+            throw new CreativesDeletionException(ErrorMessages.CAN_NOT_DELETE_ACTOR);
         }
 
         creativesRepository.delete(actor);
