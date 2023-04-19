@@ -23,6 +23,7 @@ public class MovieController {
     @Autowired
     private MovieService movieService;
 
+
     @GetMapping
     public ResponseEntity<List<Movie>> getAllMovies() {
         try {
@@ -87,6 +88,16 @@ public class MovieController {
         } catch (MediaDeletionException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (Exception e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/actors/{id}")
+    public ResponseEntity<String> deleteActor(@PathVariable Long id) {
+        try {
+            movieService.deleteActorNotInMovie(id);
+            return ResponseEntity.ok().body(ErrorMessages.SUCCESS);
+        }catch (Exception e){
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
